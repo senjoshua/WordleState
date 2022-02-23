@@ -1,0 +1,130 @@
+body {
+  font-family: Arial;
+  text-align: center;
+  background-color: #121213;;
+}
+
+#board {
+  width: 230px;
+  height: 50px;
+  margin: 0 auto;
+  margin-top: 3px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tile {
+  /* box */
+  width: 35px;
+  height: 35px;
+  margin: 2.5px;
+
+  /* text */
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  caret-color: transparent;
+  text-transform: uppercase;
+  text-overflow: "";
+  overflow: hidden;
+}
+
+.correct {
+  background-color: #6AAA64;
+  color: white;
+  border: 2px solid #6AAA64;
+}
+
+.present {
+  background-color: #C9B458;
+  color: white;
+  border: 2px ;
+}
+
+.absent {
+  background-color: #3a3a3c;
+  color: white;
+  border: 2px solid #3a3a3c;
+}
+
+.empty {
+  color: white; 
+  border: 2px solid #3a3a3c;
+}
+
+.tile.flip {
+  animation-name: flipping;
+  animation-duration: 250ms;
+  animation-timing-function: ease-in;
+}
+
+@keyframes flipping {
+  0% {
+      transform: rotateX(-90deg);
+  }
+  100% {
+      transform: rotateX(0deg);
+  }
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #3a3a3c;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  top: 2px;
+  background-color: white;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+input:checked + .slider {
+  background-color: #6AAA64;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #6AAA64;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(calc(100% - 4px));
+  -ms-transform: translateX(calc(100% - 4px));
+  transform: translateX(calc(100% - 4px));
+}
+
+.slider.round {
+  border-radius: 20px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}

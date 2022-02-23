@@ -1,0 +1,22 @@
+{
+    "name": "WordleState",
+    "description": "Shows your correctly guessed letters in their positions for Wordle",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "permissions": [
+        "activeTab"
+    ],
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.nytimes.com/games/wordle/*"
+            ],
+            "js": [
+                "storage.js"
+            ]
+        }
+    ]
+}
