@@ -70,6 +70,23 @@ body {
   }
 }
 
+.tile.pop {
+  animation-name: popin;
+  animation-duration: 100ms;
+}
+
+@keyframes popin {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  40% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
 .switch {
   position: relative;
   display: inline-block;

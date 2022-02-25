@@ -2,18 +2,42 @@
 document.addEventListener('DOMContentLoaded', async () => {
   for (let i=0; i<5; i++){
     var span = document.getElementById(i);
+    span.addEventListener('paste', e => e.preventDefault());
     span.addEventListener('DOMSubtreeModified', function(){
-      if(this.innerText.length > 1){
-        var c = this.innerText.charAt(this.innerText.length-1);
-        this.innerText = c;
-      }
       if(this.innerText){
         this.className = "tile absent";
+        this.classList.add('pop')
       }
       else{
         this.className = "tile empty";
       }
-   });
+    });
+    span.addEventListener('keypress', function(e){
+          this.textContent = "";
+    });
+    span.addEventListener('keyup', function(e){
+      if((/^[a-z0-9]$/i.test(e.key))){
+        let j=i+1;
+        while(j<5){
+          if(!document.getElementById(j).className.includes("correct")){
+            document.getElementById(j).focus(); 
+            break;
+          }
+          j++;
+        }
+      }
+      if(e.key == "Backspace" || e.key == "Delete"){
+        document.getElementById(i).innerText = "";
+        let j=i-1;
+        while(j>=0){
+          if(!document.getElementById(j).className.includes("correct")){
+            document.getElementById(j).focus(); 
+            break;
+          }
+          j--;
+        }
+      }
+    });
   }
   
   document.getElementById("theme").addEventListener("change", function() {
