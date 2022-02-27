@@ -2,19 +2,23 @@
 document.addEventListener('DOMContentLoaded', async () => {
   for (let i=0; i<5; i++){
     var span = document.getElementById(i);
+    // disable pasting into span
     span.addEventListener('paste', e => e.preventDefault());
+    // change tile color when text added
     span.addEventListener('DOMSubtreeModified', function(){
       if(this.innerText){
         this.className = "tile absent";
-        this.classList.add('pop')
+        this.classList.add('pop');
       }
       else{
         this.className = "tile empty";
       }
     });
+    // limit tile to one character
     span.addEventListener('keypress', function(e){
           this.textContent = "";
     });
+    // shift focus to next tile
     span.addEventListener('keyup', function(e){
       if((/^[a-z0-9]$/i.test(e.key))){
         let j=i+1;
@@ -26,6 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           j++;
         }
       }
+      // shift focus to previous tile
       if(e.key == "Backspace" || e.key == "Delete"){
         document.getElementById(i).innerText = "";
         let j=i-1;
@@ -40,6 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
   
+  // darkMode check
   document.getElementById("theme").addEventListener("change", function() {
     if (document.getElementById("theme").checked == true) {
       document.body.style.background = "#121213"; 
