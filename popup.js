@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
     // shift focus to next tile
     span.addEventListener('keyup', function(e){
-      if((/^[a-z0-9]$/i.test(e.key))){
+      if((/^[a-z0-9]$/i.test(e.key)) || (e.key == "ArrowRight")){
         let j=i+1;
         while(j<5){
           if(!document.getElementById(j).className.includes("correct")){
@@ -30,16 +30,23 @@ document.addEventListener('DOMContentLoaded', async () => {
           j++;
         }
       }
+    });
+
+    span.addEventListener('keydown', function(e){
       // shift focus to previous tile
-      if(e.key == "Backspace" || e.key == "Delete"){
-        document.getElementById(i).innerText = "";
-        let j=i-1;
-        while(j>=0){
-          if(!document.getElementById(j).className.includes("correct")){
-            document.getElementById(j).focus(); 
-            break;
+      if(e.key == "Backspace" || e.key == "ArrowLeft"){
+        if(e.key != "ArrowLeft" && document.getElementById(i).innerText != ""){
+            document.getElementById(i).innerText = "";
+        }
+        else{
+          let j=i-1;
+          while(j>=0){
+            if(!document.getElementById(j).className.includes("correct")){
+              document.getElementById(j).focus(); 
+              break;
+            }
+            j--;
           }
-          j--;
         }
       }
     });
